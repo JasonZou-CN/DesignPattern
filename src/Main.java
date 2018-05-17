@@ -5,12 +5,15 @@ public class Main {
 
     public static void main(String[] args) {
 //        System.out.println("Hello World!");
+        observe();
+    }
 
-        /*观察者模式*/
+    /*观察者模式*/
+    public static void observe() {
         WeatherData weatherData = new WeatherData();
         StatisticsDisplay display = new StatisticsDisplay(weatherData);
-        weatherData.setMeasurements(80,60,30.4f);
-        weatherData.setMeasurements(82,70,27.4f);
-        weatherData.setMeasurements(54,40,36.4f);
+        weatherData.setDatas(666);
     }
+
+
 }

@@ -5,53 +5,63 @@ import java.util.List;
 
 public class WeatherData implements ISubject {
 
-    private List IObservers = null; // 观察者列表
+    private List<IObserver> observers = null; // 观察者列表
+    private boolean changed = false;
 
-    private float temperature; // 温度
-    private float humidity; // 湿度
-    private float pressure; // 气压
+    private int data; // 温度
 
     public WeatherData() {
-        IObservers = new ArrayList();
+        observers = new ArrayList();
     }
 
     @Override
     public void registerObserver(IObserver o) {
-        IObservers.add(o);
+        observers.add(o);
     }
 
     @Override
     public void removeObserver(IObserver o) {
-        int i = IObservers.indexOf(o);
-        if (i >= 0) {
-            IObservers.remove(i);
-        }
+        observers.remove(o);
     }
 
     /**
-     * 更新通知所有的观察者
+     * 通知订阅者拉取数据
      */
     @Override
     public void notifyObservers() {
-        for (int i = 0; i < IObservers.size(); i++) {
-            IObserver IObserver = (IObserver) IObservers.get(i);
-            IObserver.update(temperature, humidity, pressure);
-        }
+        notifyObservers(null);
     }
 
-    public void measurementsChanged() {
-        notifyObservers();
-    }
-
-    /**数据源变动
-     * @param temperature
-     * @param humidity
-     * @param pressure
+    /**
+     * @param data 保存被更新的数据
      */
-    public void setMeasurements(float temperature, float humidity, float pressure) {
-        this.temperature = temperature;
-        this.humidity = humidity;
-        this.pressure = pressure;
-        measurementsChanged();
+    @Override
+    public void notifyObservers(Object data) {
+        if (!changed) {
+            return;
+        }
+        for (int i = 0; i < observers.size(); i++) {
+            IObserver observer = (IObserver) observers.get(i);
+            observer.update(this, data);
+        }
+        changed = false;
+    }
+
+    /**
+     * 数据更改，允许通知订阅者,细粒度控制
+     */
+    @Override
+    public void setChanged() {
+        this.changed = true;
+    }
+
+
+    /**
+     * 数据源变动
+     */
+    public void setDatas(int data) {
+        this.data = data;
+        setChanged();
+        notifyObservers(data);
     }
 }
