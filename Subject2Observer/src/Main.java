@@ -1,8 +1,4 @@
-import com.zx.design.subject2observer.StatisticsDisplay;
-import com.zx.design.subject2observer.WeatherData;
-
 public class Main {
-
     public static void main(String[] args) {
 //        System.out.println("Hello World!");
         observe();
@@ -14,6 +10,5 @@ public class Main {
         StatisticsDisplay display = new StatisticsDisplay(weatherData);
         weatherData.setDatas(666);
     }
-
 
 }

@@ -1,5 +1,3 @@
-package com.zx.design.subject2observer;
-
 public class StatisticsDisplay implements IObserver, DisplayElement {
 
     private int data; // 温度

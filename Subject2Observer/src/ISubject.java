@@ -1,5 +1,3 @@
-package com.zx.design.subject2observer;
-
 /**
  * 主题：一对多关系中的'一'方
  * 1.自身会维护一订阅者的集合（Collection）

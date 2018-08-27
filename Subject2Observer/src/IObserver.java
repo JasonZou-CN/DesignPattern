@@ -1,5 +1,3 @@
-package com.zx.design.subject2observer;
-
 /**一对多关系中的'多'方
  * 1.持有主题的引用，
  */

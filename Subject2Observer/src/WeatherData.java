@@ -1,5 +1,3 @@
-package com.zx.design.subject2observer;
-
 import java.util.ArrayList;
 import java.util.List;
 
