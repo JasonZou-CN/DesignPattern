@@ -3,7 +3,7 @@ import java.util.List;
 
 public class WeatherData implements ISubject {
 
-    private List<IObserver> observers = null; // 观察者列表
+    private List<IObserver> observers; // 观察者列表
     private boolean changed = false;
 
     private int data; // 温度
@@ -39,7 +39,7 @@ public class WeatherData implements ISubject {
             return;
         }
         for (int i = 0; i < observers.size(); i++) {
-            IObserver observer = (IObserver) observers.get(i);
+            IObserver observer = observers.get(i);
             observer.update(this, data);
         }
         changed = false;
